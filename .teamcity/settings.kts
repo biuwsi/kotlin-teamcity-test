@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2019_2.DslContext
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.project
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
@@ -48,6 +49,11 @@ object Build : BuildType({
 
     id("Build")
     steps {
+        gradle {
+            name = "Gradle build"
+            enableStacktrace = true
+            tasks = "clean build"
+        }
 
         script {
             name = "Set version using script"
